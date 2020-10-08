@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {UsersViewComponent} from "./modules/user/users-view/users-view.component";
+import {UserProfileComponent} from "./modules/user/user-profile/user-profile.component";
 
 
 const routes: Routes = [
@@ -12,7 +13,15 @@ const routes: Routes = [
 	{
 		path: 'users',
 		component: UsersViewComponent
-	}
+	},
+	{
+		path: 'user/:id',
+		component: UserProfileComponent
+	},
+	{
+		path: '**',
+		redirectTo: 'users'
+	},
 ];
 
 @NgModule({

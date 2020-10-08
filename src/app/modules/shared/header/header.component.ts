@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {HeaderService} from "../../../services/header.service";
+import {Header} from "../../../models/header";
 
 @Component({
 	selector: 'app-header',
@@ -7,7 +9,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-	constructor() {
+	title: string;
+	showSearch: boolean = false;
+
+	constructor(private headerService: HeaderService) {
+		this.headerService.updateHeader$.subscribe((header: Header) => {
+			this.title = header.title || '';
+			this.showSearch = !!header.showSearch;
+		});
 	}
 
 	ngOnInit(): void {

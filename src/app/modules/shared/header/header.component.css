@@ -1,7 +1,23 @@
-div {
+.header-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 211px;
   background: #FFFFFF 0 0 no-repeat padding-box;
   box-shadow: 0 3px 6px #00000029;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-title {
+  font: normal normal 600 36px/48px Segoe UI;
+  color: #000000;
 }
 
 /*# sourceMappingURL=header.component.css.map */
