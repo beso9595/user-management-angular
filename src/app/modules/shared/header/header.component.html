@@ -1,6 +1,6 @@
 <div class="header-main">
 	<div class="header-content">
 		<div class="header-title">{{title}}</div>
-		<input *ngIf="showSearch" type="text" style="border: 2px solid #707070;">
+		<input *ngIf="showSearch" type="text" (keyup)="onSearchChange($event)">
 	</div>
 </div>
