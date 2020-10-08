@@ -12,6 +12,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	title: string;
 	showSearch: boolean = false;
+	showButton: boolean = false;
+	disableButton: boolean = false;
+	buttonIcon: string;
 
 	updateHeaderSub: Subscription;
 
@@ -19,6 +22,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.headerService.updateHeader$.subscribe((header: Header) => {
 			this.title = header.title || '';
 			this.showSearch = !!header.showSearch;
+			this.showButton = !!header.showButton;
+			this.disableButton = !!header.disableButton;
+			this.buttonIcon = header.buttonIcon;
 		});
 	}
 
@@ -27,6 +33,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	onSearchChange(e): void {
 		this.headerService.onSearchChange(e.target.value);
+	}
+
+	onButtonClick():void {
+		if(!this.disableButton){
+			this.headerService.onButtonClick();
+		}
 	}
 
 	ngOnDestroy(): void {

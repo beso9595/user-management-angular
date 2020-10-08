@@ -10,15 +10,21 @@ import {Subscription} from "rxjs";
 export class UsersViewComponent implements OnInit, OnDestroy {
 
 	searchWordChangeSub: Subscription;
+	buttonClickSub: Subscription;
 
 	constructor(private headerService: HeaderService) {
 		this.headerService.updateHeader({
 			title: 'Project Access',
 			showSearch: true,
+			showButton: true,
+			buttonIcon: 'add'
 		});
 		//
 		this.searchWordChangeSub = this.headerService.searchWordChange$.subscribe((searchWord: string) => {
 			console.log(searchWord);
+		});
+		this.buttonClickSub = this.headerService.buttonClick$.subscribe(() => {
+			console.log('button click');
 		});
 	}
 
@@ -27,6 +33,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.searchWordChangeSub.unsubscribe();
+		this.buttonClickSub.unsubscribe();
 	}
 
 }

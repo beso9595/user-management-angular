@@ -20,4 +20,23 @@
 .header-title {
 	font: normal normal 600 36px/48px Segoe UI;
 	color: #000000;
+	margin-left: 100px;
+}
+
+.header-button {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	margin-left: 10%;
+	margin-top: -30px;
+	border-radius: 50%;
+	cursor: pointer;
+	background: #305ECA 0% 0% no-repeat padding-box;
+
+	text-align: center;
+}
+
+.header-button-enabled {
+	cursor: default;
+	background: #C6C6C6 0% 0% no-repeat padding-box;
 }

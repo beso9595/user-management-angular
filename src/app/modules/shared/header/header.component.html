@@ -4,3 +4,9 @@
 		<input *ngIf="showSearch" type="text" (keyup)="onSearchChange($event)">
 	</div>
 </div>
+<div *ngIf="showButton"
+	 (click)="onButtonClick()"
+	 class="header-button"
+	 [class.header-button-enabled]="disableButton">
+	<img src="../../../../assets/icons/{{buttonIcon}}.png">
+</div>

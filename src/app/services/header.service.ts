@@ -9,9 +9,11 @@ export class HeaderService {
 
 	private updateHeaderSource = new Subject<Header>();
 	private searchWordChangeSource = new Subject<string>();
+	private buttonClickSource = new Subject<any>();
 
 	updateHeader$ = this.updateHeaderSource.asObservable();
 	searchWordChange$ = this.searchWordChangeSource.asObservable();
+	buttonClick$ = this.buttonClickSource.asObservable();
 
 	updateHeader(data: Header) {
 		this.updateHeaderSource.next(data);
@@ -19,5 +21,9 @@ export class HeaderService {
 
 	onSearchChange(searchWord: string) {
 		this.searchWordChangeSource.next(searchWord);
+	}
+
+	onButtonClick() {
+		this.buttonClickSource.next();
 	}
 }

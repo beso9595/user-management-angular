@@ -12,6 +12,9 @@ export class UserProfileComponent implements OnInit {
 		this.headerService.updateHeader({
 			title: 'User Setup',
 			showSearch: false,
+			showButton: true,
+			disableButton: true,
+			buttonIcon: 'settings'
 		});
 	}
 
