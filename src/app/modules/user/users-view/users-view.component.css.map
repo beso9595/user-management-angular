@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"users-view.component.css"}
+{"version":3,"sourceRoot":"","sources":["users-view.component.scss"],"names":[],"mappings":"AAAA;EACC;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA","file":"users-view.component.css"}

@@ -1,1 +1,36 @@
-<p>users-view works!</p>
+<div class="user-view-main">
+	<div class="user-view-table-header">
+		<div>
+
+		</div>
+		<div>
+			USER
+		</div>
+		<div>
+			ROLE
+		</div>
+		<div>
+			STATUS
+		</div>
+		<div>
+			ACTIONS
+		</div>
+	</div>
+	<div *ngFor="let user of userList; trackBy: trackByFn" class="user-view-table-row">
+		<div>
+
+		</div>
+		<div>
+			{{user.email}}
+		</div>
+		<div>
+			{{user.roleId}}
+		</div>
+		<div>
+			{{user.isActive}}
+		</div>
+		<div>
+			ACTIONS
+		</div>
+	</div>
+</div>

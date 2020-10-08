@@ -1,0 +1,16 @@
+.user-view-main {
+	display: flex;
+	flex-direction: column;
+}
+
+.user-view-table-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.user-view-table-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
