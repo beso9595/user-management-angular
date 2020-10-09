@@ -15,4 +15,74 @@
   justify-content: space-between;
 }
 
+.user-view-table-avatar-column {
+  width: 4%;
+}
+
+.user-view-table-user-column, .user-view-table-role-column, .user-view-table-status-column, .user-view-table-actions-column {
+  width: 24%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-view-table-user-column {
+  text-align: left;
+}
+
+.user-view-table-role-column div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.user-view-table-role-column div div {
+  display: flex;
+  flex-direction: row;
+}
+.user-view-table-role-column div div div {
+  width: 40px;
+  height: 25px;
+  background-color: #7E7EF1;
+  border-radius: 30px;
+  margin-right: 20px;
+}
+
+.user-view-table-status-column img {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.user-view-table-actions-column {
+  text-align: right;
+}
+.user-view-table-actions-column div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.user-view-table-actions-column div img {
+  cursor: pointer;
+  color: #C6C6C6;
+}
+.user-view-table-actions-column div img:first-child {
+  margin-right: 10px;
+}
+
+.user-view-header-separator, .user-view-row-separator {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.user-view-header-separator div, .user-view-row-separator div {
+  width: 96%;
+  height: 2px;
+  background-color: #00000029;
+}
+
+.user-view-row-separator {
+  opacity: 0.5;
+}
+
 /*# sourceMappingURL=users-view.component.css.map */

@@ -1,13 +1,24 @@
 import {Injectable} from '@angular/core';
 import {User} from "../models/user/user";
 import {Sort} from "../models/sort";
+import {Role} from "../models/user/role";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService {
 
-	private list: User[] = [
+	private roleList: Role[] = [
+		{
+			id: 1,
+			name: 'Admin'
+		},
+		{
+			id: 2,
+			name: 'User'
+		}
+	];
+	private userList: User[] = [
 		{
 			id: 1,
 			firstName: 'Danniel',
@@ -110,9 +121,9 @@ export class UserService {
 	}
 
 	getUsers(pageSize: number, sort: Sort, page: number, searchWord?: string): User[] {
-		let filteredUserList: User[] = this.list;
+		let filteredUserList: User[] = this.userList;
 		if (searchWord) {
-			filteredUserList = this.list.filter(u => {
+			filteredUserList = this.userList.filter(u => {
 				return u.email.includes(searchWord) || (((u.firstName || '') + ' ' + (u.lastName || '')).trim()).includes(searchWord);
 			});
 		}
@@ -122,13 +133,13 @@ export class UserService {
 			let compareFn: (a: User, b: User) => number;
 			switch (sort.column) {
 				case 'user':
-					compareFn = this.sortByFullName;
+					compareFn = UserService.sortByFullName;
 					break;
 				case 'role':
-					compareFn = this.sortByRole;
+					compareFn = UserService.sortByRole;
 					break;
 				case 'status':
-					compareFn = this.sortByStatus;
+					compareFn = UserService.sortByStatus;
 					break;
 			}
 			if (compareFn) {
@@ -140,7 +151,15 @@ export class UserService {
 		return sortedUserList;
 	}
 
-	private sortByFullName(a: User, b: User): number {
+	getRoleNameById(roleId: number) {
+		if (roleId) {
+			const role = this.roleList.find(r => r.id === roleId);
+			return role ? role.name : '';
+		}
+		return '';
+	}
+
+	private static sortByFullName(a: User, b: User): number {
 		const aFullName = ((a.firstName || '') + ' ' + (a.lastName || '')).trim();
 		const bFullName = ((b.firstName || '') + ' ' + (b.lastName || '')).trim();
 		if (aFullName < bFullName) {
@@ -152,7 +171,7 @@ export class UserService {
 		return 0;
 	}
 
-	private sortByRole(a: User, b: User): number {
+	private static sortByRole(a: User, b: User): number {
 		if (a.roleId < b.roleId) {
 			return -1;
 		}
@@ -162,7 +181,7 @@ export class UserService {
 		return 0;
 	}
 
-	private sortByStatus(a: User, b: User): number {
+	private static sortByStatus(a: User, b: User): number {
 		if (a.roleId && !b.roleId) {
 			return -1;
 		}

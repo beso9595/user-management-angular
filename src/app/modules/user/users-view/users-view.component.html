@@ -1,36 +1,72 @@
 <div class="user-view-main">
 	<div class="user-view-table-header">
-		<div>
-
+		<div class="user-view-table-avatar-column">
 		</div>
-		<div>
+		<div class="user-view-table-user-column">
 			USER
 		</div>
-		<div>
+		<div class="user-view-table-role-column">
 			ROLE
 		</div>
-		<div>
+		<div class="user-view-table-status-column">
 			STATUS
 		</div>
-		<div>
+		<div class="user-view-table-actions-column">
 			ACTIONS
 		</div>
 	</div>
-	<div *ngFor="let user of userList; trackBy: trackByFn" class="user-view-table-row">
-		<div>
-
-		</div>
-		<div>
-			{{user.email}}
-		</div>
-		<div>
-			{{user.roleId}}
-		</div>
-		<div>
-			{{user.isActive}}
-		</div>
-		<div>
-			ACTIONS
-		</div>
+	<div class="user-view-header-separator">
+		<div></div>
 	</div>
+	<ng-container *ngFor="let user of userList; trackBy: trackByFn">
+		<div class="user-view-table-row">
+			<div class="user-view-table-avatar-column">
+				<img alt="avatar" src="../../../../assets/images/avatar_mini.png">
+			</div>
+			<div class="user-view-table-user-column">
+				<div style="display: flex; flex-direction: column;">
+					<div>
+						<b>
+							{{((user.firstName || '') + ' ' + (user.lastName || '')).trim()}}
+						</b>
+					</div>
+					<div>
+						{{user.email}}
+					</div>
+				</div>
+			</div>
+			<div class="user-view-table-role-column">
+				<div>
+					<div>
+						<div *ngIf="user.roleId === 1">
+							<img alt="key" src="../../../../assets/images/icons/key.png">
+						</div>
+						<b>
+							{{userService.getRoleNameById(user.roleId)}}
+						</b>
+					</div>
+				</div>
+			</div>
+			<div class="user-view-table-status-column">
+				<div>
+					<img alt="toggle"
+						 (click)="onUserStatusClick(user)"
+						 src="../../../../assets/images/toggle_{{user.isActive ? 'on' : 'off'}}.png">
+				</div>
+			</div>
+			<div class="user-view-table-actions-column">
+				<div>
+					<img alt="settings"
+						 (click)="onOpenUserProfileClick(user.id)"
+						 src="../../../../assets/images/icons/settings_mini.png">
+					<img alt="delete"
+						 (click)="onDeleteUserClick(user)"
+						 src="../../../../assets/images/icons/delete_mini.png">
+				</div>
+			</div>
+		</div>
+		<div class="user-view-row-separator">
+			<div></div>
+		</div>
+	</ng-container>
 </div>

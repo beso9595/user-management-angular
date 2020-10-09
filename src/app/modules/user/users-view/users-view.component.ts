@@ -17,7 +17,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 	buttonClickSub: Subscription;
 
 	constructor(private headerService: HeaderService,
-				private userService: UserService) {
+				public userService: UserService) {
 		this.headerService.updateHeader({
 			title: 'Project Access',
 			showSearch: true,
@@ -40,6 +40,18 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 
 	trackByFn(index: number, item: User): any {
 		return item.id;
+	}
+
+	onUserStatusClick(user: User): void {
+		user.isActive = !user.isActive;
+	}
+
+	onOpenUserProfileClick(userId: number): void {
+
+	}
+
+	onDeleteUserClick(user: User): void {
+
 	}
 
 	ngOnDestroy(): void {
