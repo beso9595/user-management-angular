@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalBase} from "../../modal/entities/modal-base";
+import {ModalService} from "../../../../services/modal.service";
 
 @Component({
 	selector: 'app-user-delete-modal',
@@ -8,11 +9,15 @@ import {ModalBase} from "../../modal/entities/modal-base";
 })
 export class UserDeleteModalComponent extends ModalBase implements OnInit {
 
-	constructor() {
+	constructor(private modalService: ModalService) {
 		super();
 	}
 
 	ngOnInit(): void {
+	}
+
+	onDeleteUserClick(): void {
+		this.modalService.confirmModal(this.data.id);
 	}
 
 }

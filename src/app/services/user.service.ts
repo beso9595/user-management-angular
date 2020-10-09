@@ -163,6 +163,10 @@ export class UserService {
 		};
 	}
 
+	deleteUser(userId: number): void {
+		this.userList = this.userList.filter((u: User) => u.id !== userId);
+	}
+
 	getRoleNameById(roleId: number) {
 		if (roleId) {
 			const role = this.roleList.find(r => r.id === roleId);

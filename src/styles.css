@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: Segoe UI;
+  src: url("assets/fonts/Segoe UI.ttf") format("opentype");
+}
 body {
   margin: 0;
   background-color: #dbdbdb;
+  font-family: Segoe UI, serif;
 }
 
 /*# sourceMappingURL=styles.css.map */

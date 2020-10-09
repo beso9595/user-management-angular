@@ -1,3 +1,9 @@
+.active {
+  color: #44a0d3;
+}
 
+.inactive {
+  color: #fd0d00;
+}
 
 /*# sourceMappingURL=user-delete-modal.component.css.map */

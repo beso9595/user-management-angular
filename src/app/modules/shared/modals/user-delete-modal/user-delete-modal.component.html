@@ -1,1 +1,14 @@
-<p>user-delete-modal works!</p>
+<div style="display: flex; flex-direction: column;">
+	<div style="display: flex; flex-direction: row; justify-content: space-between;">
+		<img alt="user" src="../../../../../assets/images/icons/user.png">
+		<div>{{((data.firstName || '') + ' ' + (data.lastName || '')).trim()}}</div>
+		<b [ngClass]="{'active': data.isActive, 'inactive': !data.isActive}">
+			{{data.isActive ? 'Active' : 'Inactive'}} User
+		</b>
+	</div>
+	<div>
+		<button (click)="onDeleteUserClick()">
+			Delete User
+		</button>
+	</div>
+</div>

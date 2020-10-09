@@ -8,6 +8,7 @@ import {UserResponse} from "../../../models/user/user-response";
 import {Router} from "@angular/router";
 import {ModalContainer} from "../../shared/modal/entities/modal-container";
 import {UserDeleteModalComponent} from "../../shared/modals/user-delete-modal/user-delete-modal.component";
+import {ModalService} from "../../../services/modal.service";
 
 @Component({
 	selector: 'app-users-view',
@@ -29,13 +30,15 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 
 	searchWordChangeSub: Subscription;
 	buttonClickSub: Subscription;
+	userDeleteModalConfirmSub: Subscription;
 
 	showUserDeleteModal: boolean = false;
 	userDeleteModal: ModalContainer;
 
 	constructor(private headerService: HeaderService,
 				public userService: UserService,
-				private router: Router) {
+				private router: Router,
+				private modalService: ModalService) {
 		this.headerService.updateHeader({
 			title: 'Project Access',
 			showSearch: true,
@@ -81,6 +84,17 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 	onDeleteUserClick(user: User): void {
 		this.userDeleteModal = new ModalContainer(UserDeleteModalComponent, 'Delete User', user);
 		this.showUserDeleteModal = true;
+		//
+		this.userDeleteModalConfirmSub = this.modalService.confirmModal$.subscribe((userId: number) => {
+			this.userService.deleteUser(userId);
+			this.loadUsers();
+			this.onUserDeleteModalClose();
+		});
+	}
+
+	onUserDeleteModalClose(): void {
+		this.showUserDeleteModal = false;
+		this.userDeleteModalConfirmSub.unsubscribe();
 	}
 
 	onSort(columnName: string): void {

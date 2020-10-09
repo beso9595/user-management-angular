@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"user-delete-modal.component.css"}
+{"version":3,"sourceRoot":"","sources":["user-delete-modal.component.scss"],"names":[],"mappings":"AAAA;EACC;;;AAGD;EACC","file":"user-delete-modal.component.css"}

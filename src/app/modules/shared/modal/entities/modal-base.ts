@@ -1,5 +1,10 @@
-import {Input} from "@angular/core";
+import {Component, Input} from "@angular/core";
+import {Observable} from "rxjs/src/internal/Observable";
 
-export class ModalBase {
+@Component({
+	template: ''
+})
+export abstract class ModalBase {
 	@Input() data: any;
+	confirmCallback: Observable<any>;
 }

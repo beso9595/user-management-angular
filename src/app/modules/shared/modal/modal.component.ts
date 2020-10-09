@@ -1,7 +1,8 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalContainer} from "./entities/modal-container";
 import {ModalDirective} from "./entities/modal.directive";
 import {ModalBase} from "./entities/modal-base";
+import {Subject} from "rxjs";
 
 @Component({
 	selector: 'app-modal',
@@ -12,7 +13,10 @@ export class ModalComponent implements OnInit {
 
 	title: string;
 
+	private confirmClick$ = (new Subject<any>()).asObservable();
+
 	@Input() modal: ModalContainer;
+	@Output() onClose = new EventEmitter<any>();
 
 	@ViewChild(ModalDirective, {static: true}) modalDirective: ModalDirective;
 
@@ -32,6 +36,10 @@ export class ModalComponent implements OnInit {
 		const componentRef = viewContainerRef.createComponent<ModalBase>(componentFactory);
 		componentRef.instance.data = this.modal.data;
 		this.title = this.modal.title;
+	}
+
+	onCloseClick(): void {
+		this.onClose.emit();
 	}
 
 }

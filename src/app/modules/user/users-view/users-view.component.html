@@ -126,4 +126,6 @@
 	</div>
 </div>
 
-<app-modal *ngIf="showUserDeleteModal" [modal]="userDeleteModal"></app-modal>
+<app-modal *ngIf="showUserDeleteModal"
+		   [modal]="userDeleteModal"
+		   (onClose)="onUserDeleteModalClose()"></app-modal>
