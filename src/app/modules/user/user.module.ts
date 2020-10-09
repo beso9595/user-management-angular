@@ -4,6 +4,7 @@ import {UsersViewComponent} from './users-view/users-view.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {FormsModule} from "@angular/forms";
 	imports: [
 		BrowserModule,
 		CommonModule,
-		FormsModule
+		FormsModule,
+		SharedModule
 	],
 	exports: [
 		UsersViewComponent

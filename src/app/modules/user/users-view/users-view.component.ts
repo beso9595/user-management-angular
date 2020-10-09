@@ -5,6 +5,9 @@ import {User} from "../../../models/user/user";
 import {UserService} from "../../../services/user.service";
 import {Sort} from "../../../models/sort";
 import {UserResponse} from "../../../models/user/user-response";
+import {Router} from "@angular/router";
+import {ModalContainer} from "../../shared/modal/entities/modal-container";
+import {UserDeleteModalComponent} from "../../shared/modals/user-delete-modal/user-delete-modal.component";
 
 @Component({
 	selector: 'app-users-view',
@@ -27,8 +30,12 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 	searchWordChangeSub: Subscription;
 	buttonClickSub: Subscription;
 
+	showUserDeleteModal: boolean = false;
+	userDeleteModal: ModalContainer;
+
 	constructor(private headerService: HeaderService,
-				public userService: UserService) {
+				public userService: UserService,
+				private router: Router) {
 		this.headerService.updateHeader({
 			title: 'Project Access',
 			showSearch: true,
@@ -68,11 +75,12 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 	}
 
 	onOpenUserProfileClick(userId: number): void {
-
+		this.router.navigateByUrl(`user/${userId}`);
 	}
 
 	onDeleteUserClick(user: User): void {
-
+		this.userDeleteModal = new ModalContainer(UserDeleteModalComponent, 'Delete User', user);
+		this.showUserDeleteModal = true;
 	}
 
 	onSort(columnName: string): void {
