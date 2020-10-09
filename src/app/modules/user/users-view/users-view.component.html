@@ -105,7 +105,8 @@
 		</div>
 		<div class="user-view-paging-page">
 			<div>
-				<div class="user-view-paging-page-previous"
+				<div *ngIf="userList.length > 0"
+					 class="user-view-paging-page-previous"
 					 (click)="onPreviousPageClick()"
 					 [class.user-view-paging-page-number-disabled]="page === 1">
 					Previous
@@ -116,7 +117,8 @@
 					 (click)="onPageClick(pageNumber)">
 					{{pageNumber}}
 				</div>
-				<div class="user-view-paging-page-next"
+				<div *ngIf="userList.length > 0"
+					 class="user-view-paging-page-next"
 					 (click)="onNextPageClick()"
 					 [class.user-view-paging-page-number-disabled]="page === getTotalPages()">
 					Next

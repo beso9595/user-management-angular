@@ -1,1 +1,40 @@
-<p>user-profile works!</p>
+<div class="user-profile-container">
+	<div class="user-profile-left">
+		<img alt="avatar" src="../../../../assets/images/avatar.png">
+		<div class="user-profile-left-photo-upload">
+			UPLOAD A PHOTO
+		</div>
+		<div class="user-profile-left-user-name">
+			<div>
+				{{user?.firstName}}
+			</div>
+			<div>
+				{{user?.lastName}}
+			</div>
+		</div>
+		<div class="user-profile-left-email">
+			{{user?.email}}
+		</div>
+		<div style="text-align: center;">
+			<button>
+				Resend the invite
+			</button>
+		</div>
+	</div>
+	<div class="user-profile-center">
+		<div class="user-profile-center-details">
+			Details
+		</div>
+		<div class="user-profile-center-status">
+			<img alt="toggle"
+				 (click)="onUserStatusChange()"
+				 src="../../../../assets/images/toggle_{{user?.isActive ? 'on' : 'off'}}.png">
+			<div>
+				The user is <span>
+				{{user?.isActive ? 'Active' : 'Inactive'}}
+			</span>
+			</div>
+		</div>
+	</div>
+	<div>3</div>
+</div>

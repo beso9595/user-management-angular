@@ -163,6 +163,11 @@ export class UserService {
 		};
 	}
 
+	getUserById(userId: number): User {
+		const user: User = this.userList.find(u => u.id === userId);
+		return user || null;
+	}
+
 	addUser(user: User): void {
 
 		this.userList.push({

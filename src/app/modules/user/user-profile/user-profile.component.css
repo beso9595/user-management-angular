@@ -1,3 +1,61 @@
+.user-profile-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
+.user-profile-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-left-photo-upload {
+  text-align: center;
+  margin-top: 10px;
+  font: normal normal 300 14px/19px Segoe UI;
+  color: #B0ACAC;
+}
+
+.user-profile-left-user-name {
+  margin-top: 30px;
+}
+.user-profile-left-user-name div {
+  font: normal normal 600 48px/48px Segoe UI;
+  color: #000000;
+  text-align: center;
+}
+
+.user-profile-left-email {
+  font: normal normal 300 16px/21px Segoe UI;
+  color: #000000;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.user-profile-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-center-details {
+  text-align: left;
+  font: normal normal 600 36px/48px Segoe UI;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+.user-profile-center-status {
+  display: flex;
+  flex-direction: row;
+}
+.user-profile-center-status img {
+  cursor: pointer;
+}
+.user-profile-center-status div {
+  font: normal normal 300 16px/21px Segoe UI;
+}
+.user-profile-center-status div span {
+  font: normal normal bold 16px/21px Segoe UI;
+}
 
 /*# sourceMappingURL=user-profile.component.css.map */
