@@ -1,17 +1,35 @@
 <div class="user-view-main">
 	<div class="user-view-table-header">
-		<div class="user-view-table-avatar-column">
+		<div class="user-view-table-avatar-header">
 		</div>
-		<div class="user-view-table-user-column">
-			USER
+		<div class="user-view-table-user-header">
+			<div class="user-view-table-sort" (click)="onSort('user')">
+				USER
+				<img *ngIf="sort && sort.column === 'user'"
+					 [class.user-view-table-sort-rotated]="sort && sort.direction === 'desc'"
+					 alt="sort"
+					 src="../../../../assets/images/icons/sort.png">
+			</div>
 		</div>
-		<div class="user-view-table-role-column">
-			ROLE
+		<div class="user-view-table-role-header">
+			<div class="user-view-table-sort" (click)="onSort('role')">
+				ROLE
+				<img *ngIf="sort && sort.column === 'role'"
+					 [class.user-view-table-sort-rotated]="sort && sort.direction === 'desc'"
+					 alt="sort"
+					 src="../../../../assets/images/icons/sort.png">
+			</div>
 		</div>
-		<div class="user-view-table-status-column">
-			STATUS
+		<div class="user-view-table-status-header">
+			<div class="user-view-table-sort" (click)="onSort('status')">
+				STATUS
+				<img *ngIf="sort && sort.column === 'status'"
+					 [class.user-view-table-sort-rotated]="sort && sort.direction === 'desc'"
+					 alt="sort"
+					 src="../../../../assets/images/icons/sort.png">
+			</div>
 		</div>
-		<div class="user-view-table-actions-column">
+		<div class="user-view-table-actions-header">
 			ACTIONS
 		</div>
 	</div>

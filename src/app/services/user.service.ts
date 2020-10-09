@@ -145,6 +145,9 @@ export class UserService {
 			}
 			if (compareFn) {
 				sortedUserList = filteredUserList.sort(compareFn);
+				if (sort.direction === 'desc') {
+					sortedUserList = sortedUserList.reverse();
+				}
 			}
 		}
 		//
@@ -153,11 +156,10 @@ export class UserService {
 		const pagedUserList = sortedUserList.filter((u: User, i: number) => {
 			return i >= min && i < max;
 		});
-		console.log(pagedUserList);
 		//
 		return {
 			list: pagedUserList,
-			total: this.userList.length,
+			total: (searchWord ? sortedUserList : this.userList).length,
 		};
 	}
 
@@ -192,10 +194,10 @@ export class UserService {
 	}
 
 	private static sortByStatus(a: User, b: User): number {
-		if (a.roleId && !b.roleId) {
+		if (a.isActive && !b.isActive) {
 			return -1;
 		}
-		if (!a.roleId && b.roleId) {
+		if (!a.isActive && b.isActive) {
 			return 1;
 		}
 		return 0;

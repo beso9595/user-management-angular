@@ -18,7 +18,10 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 
 	pageSize: number = 5;
 	page: number = 1;
-	sort: Sort;
+	sort: Sort = {
+		column: 'user',
+		direction: 'asc'
+	};
 	searchWord: string;
 
 	searchWordChangeSub: Subscription;
@@ -34,9 +37,11 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 		});
 		//
 		this.searchWordChangeSub = this.headerService.searchWordChange$.subscribe((searchWord: string) => {
-			this.searchWord = searchWord;
-			this.page = 1;
-			this.loadUsers();
+			if (this.searchWord !== searchWord) {
+				this.searchWord = searchWord;
+				this.page = 1;
+				this.loadUsers();
+			}
 		});
 		this.buttonClickSub = this.headerService.buttonClick$.subscribe(() => {
 			console.log('button click');
@@ -68,6 +73,16 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 
 	onDeleteUserClick(user: User): void {
 
+	}
+
+	onSort(columnName: string): void {
+		if (this.sort.column === columnName) {
+			this.sort.direction = this.sort.direction === 'asc' ? 'desc' : 'asc';
+		} else {
+			this.sort.column = columnName;
+			this.sort.direction = 'asc';
+		}
+		this.loadUsers();
 	}
 
 	onPageSizeChange(): void {

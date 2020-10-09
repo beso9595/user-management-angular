@@ -15,11 +15,18 @@
   justify-content: space-between;
 }
 
-.user-view-table-avatar-column {
+.user-view-table-avatar-column, .user-view-table-avatar-header {
   width: 4%;
 }
 
-.user-view-table-user-column, .user-view-table-role-column, .user-view-table-status-column, .user-view-table-actions-column {
+.user-view-table-user-header,
+.user-view-table-user-column,
+.user-view-table-role-header,
+.user-view-table-role-column,
+.user-view-table-status-header,
+.user-view-table-status-column,
+.user-view-table-actions-header,
+.user-view-table-actions-column {
   width: 24%;
   text-align: center;
   display: flex;
@@ -27,9 +34,21 @@
   justify-content: center;
 }
 
-.user-view-table-user-column {
+.user-view-table-user-header, .user-view-table-user-column {
   text-align: left;
 }
+
+.user-view-table-sort, .user-view-table-sort-rotated {
+  cursor: pointer;
+}
+.user-view-table-sort img, .user-view-table-sort-rotated img {
+  padding: 2px;
+}
+
+.user-view-table-sort-rotated {
+  transform: rotate(180deg);
+}
+
 .user-view-table-user-column div {
   display: flex;
   flex-direction: column;
@@ -57,9 +76,10 @@
   cursor: pointer;
 }
 
-.user-view-table-actions-column {
+.user-view-table-actions-header, .user-view-table-actions-column {
   text-align: right;
 }
+
 .user-view-table-actions-column div {
   display: flex;
   flex-direction: row;
