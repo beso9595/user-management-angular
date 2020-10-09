@@ -59,7 +59,7 @@
 				<div>
 					<div [class.user-view-inactive]="!user.isActive">
 						<div *ngIf="user.roleId === 1" [class.user-view-inactive-key]="!user.isActive">
-							<img alt="key" src="../../../../assets/images/icons/key.png">
+							<img alt="key" src="../../../../assets/images/icons/key_white.png">
 						</div>
 						<b>
 							{{userService.getRoleNameById(user.roleId)}}
@@ -82,7 +82,7 @@
 						 src="../../../../assets/images/icons/settings_mini.png">
 					<img alt="delete"
 						 (click)="onDeleteUserClick(user)"
-						 src="../../../../assets/images/icons/delete_mini.png">
+						 src="../../../../assets/images/icons/delete.png">
 				</div>
 			</div>
 		</div>
@@ -129,3 +129,7 @@
 <app-modal *ngIf="showUserDeleteModal"
 		   [modal]="userDeleteModal"
 		   (onClose)="onUserDeleteModalClose()"></app-modal>
+
+<app-modal *ngIf="showUserInviteModal"
+		   [modal]="userInviteModal"
+		   (onClose)="onUserInviteModalClose()"></app-modal>

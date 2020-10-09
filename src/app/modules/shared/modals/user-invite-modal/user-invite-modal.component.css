@@ -1,0 +1,19 @@
+.invite-user-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.invite-user-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-invite-valid {
+  color: #44D36A;
+}
+
+.user-invite-error {
+  color: #FF0000;
+}
+
+/*# sourceMappingURL=user-invite-modal.component.css.map */

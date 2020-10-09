@@ -17,7 +17,7 @@ export class UserDeleteModalComponent extends ModalBase implements OnInit {
 	}
 
 	onDeleteUserClick(): void {
-		this.modalService.confirmModal(this.data.id);
+		this.modalService.confirmUserDeleteModal(this.data.id);
 	}
 
 }

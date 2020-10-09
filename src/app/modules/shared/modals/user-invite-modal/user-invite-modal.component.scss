@@ -1,0 +1,26 @@
+.invite-user-main {
+	display: flex;
+	flex-direction: column;
+}
+
+.invite-user-row {
+	display: flex;
+	flex-direction: row;
+	//justify-content: space-around;
+}
+
+.user-invite-valid {
+	color: #44D36A;
+}
+
+.user-invite-error {
+	color: #FF0000;
+}
+
+//.active {
+//	color: #44a0d3;
+//}
+//
+//.inactive {
+//	color: #fd0d00;
+//}

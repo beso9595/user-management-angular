@@ -1,3 +1,14 @@
+.delete-user-main {
+	display: flex;
+	flex-direction: column;
+}
+
+.delete-user-info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 .active {
 	color: #44a0d3;
 }

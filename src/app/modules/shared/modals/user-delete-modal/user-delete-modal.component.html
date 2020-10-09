@@ -1,5 +1,5 @@
-<div style="display: flex; flex-direction: column;">
-	<div style="display: flex; flex-direction: row; justify-content: space-between;">
+<div class="delete-user-main">
+	<div class="delete-user-info">
 		<img alt="user" src="../../../../../assets/images/icons/user.png">
 		<div>{{((data.firstName || '') + ' ' + (data.lastName || '')).trim()}}</div>
 		<b [ngClass]="{'active': data.isActive, 'inactive': !data.isActive}">

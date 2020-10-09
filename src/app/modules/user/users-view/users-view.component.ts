@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {ModalContainer} from "../../shared/modal/entities/modal-container";
 import {UserDeleteModalComponent} from "../../shared/modals/user-delete-modal/user-delete-modal.component";
 import {ModalService} from "../../../services/modal.service";
+import {UserInviteModalComponent} from "../../shared/modals/user-invite-modal/user-invite-modal.component";
 
 @Component({
 	selector: 'app-users-view',
@@ -31,9 +32,12 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 	searchWordChangeSub: Subscription;
 	buttonClickSub: Subscription;
 	userDeleteModalConfirmSub: Subscription;
+	userInviteModalConfirmSub: Subscription;
 
 	showUserDeleteModal: boolean = false;
 	userDeleteModal: ModalContainer;
+	showUserInviteModal: boolean = false;
+	userInviteModal: ModalContainer;
 
 	constructor(private headerService: HeaderService,
 				public userService: UserService,
@@ -54,7 +58,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 			}
 		});
 		this.buttonClickSub = this.headerService.buttonClick$.subscribe(() => {
-			console.log('button click');
+			this.onInviteUserClick();
 		});
 		//
 		this.loadUsers();
@@ -85,7 +89,7 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 		this.userDeleteModal = new ModalContainer(UserDeleteModalComponent, 'Delete User', user);
 		this.showUserDeleteModal = true;
 		//
-		this.userDeleteModalConfirmSub = this.modalService.confirmModal$.subscribe((userId: number) => {
+		this.userDeleteModalConfirmSub = this.modalService.confirmUserDeleteModal$.subscribe((userId: number) => {
 			this.userService.deleteUser(userId);
 			this.loadUsers();
 			this.onUserDeleteModalClose();
@@ -95,6 +99,23 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 	onUserDeleteModalClose(): void {
 		this.showUserDeleteModal = false;
 		this.userDeleteModalConfirmSub.unsubscribe();
+	}
+
+	onInviteUserClick(): void {
+		this.userInviteModal = new ModalContainer(UserInviteModalComponent, 'Invite New User', {});
+		this.showUserInviteModal = true;
+		//
+		this.userInviteModalConfirmSub = this.modalService.confirmUserInviteModal$.subscribe((user: User) => {
+			console.log(user);
+			this.userService.addUser(user);
+			this.loadUsers();
+			this.onUserInviteModalClose();
+		});
+	}
+
+	onUserInviteModalClose(): void {
+		this.showUserInviteModal = false;
+		this.userInviteModalConfirmSub.unsubscribe();
 	}
 
 	onSort(columnName: string): void {

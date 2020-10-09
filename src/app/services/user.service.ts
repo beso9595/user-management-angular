@@ -163,8 +163,20 @@ export class UserService {
 		};
 	}
 
+	addUser(user: User): void {
+
+		this.userList.push({
+			...user,
+			id: this.getMaxId() + 1
+		});
+	}
+
 	deleteUser(userId: number): void {
 		this.userList = this.userList.filter((u: User) => u.id !== userId);
+	}
+
+	getRoles(): Role[] {
+		return this.roleList;
 	}
 
 	getRoleNameById(roleId: number) {
@@ -205,5 +217,9 @@ export class UserService {
 			return 1;
 		}
 		return 0;
+	}
+
+	private getMaxId(): number {
+		return Math.max(...this.userList.map(u => u.id));
 	}
 }
