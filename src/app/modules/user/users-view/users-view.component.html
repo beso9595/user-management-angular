@@ -21,10 +21,12 @@
 	<ng-container *ngFor="let user of userList; trackBy: trackByFn">
 		<div class="user-view-table-row">
 			<div class="user-view-table-avatar-column">
-				<img alt="avatar" src="../../../../assets/images/avatar_mini.png">
+				<img [class.user-view-inactive]="!user.isActive"
+					 alt="avatar"
+					 src="../../../../assets/images/avatar_mini.png">
 			</div>
 			<div class="user-view-table-user-column">
-				<div style="display: flex; flex-direction: column;">
+				<div [class.user-view-inactive]="!user.isActive">
 					<div>
 						<b>
 							{{((user.firstName || '') + ' ' + (user.lastName || '')).trim()}}
@@ -37,8 +39,8 @@
 			</div>
 			<div class="user-view-table-role-column">
 				<div>
-					<div>
-						<div *ngIf="user.roleId === 1">
+					<div [class.user-view-inactive]="!user.isActive">
+						<div *ngIf="user.roleId === 1" [class.user-view-inactive-key]="!user.isActive">
 							<img alt="key" src="../../../../assets/images/icons/key.png">
 						</div>
 						<b>
@@ -57,6 +59,7 @@
 			<div class="user-view-table-actions-column">
 				<div>
 					<img alt="settings"
+						 [hidden]="!user.isActive"
 						 (click)="onOpenUserProfileClick(user.id)"
 						 src="../../../../assets/images/icons/settings_mini.png">
 					<img alt="delete"
@@ -69,4 +72,38 @@
 			<div></div>
 		</div>
 	</ng-container>
+	<div class="user-view-paging">
+		<div style="width: 4%;">
+		</div>
+		<div class="user-view-paging-page-size">
+			<label>
+				Records on page
+				<select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()">
+					<option *ngFor="let pageSize of [5, 10, 25]" [value]="pageSize">
+						{{pageSize}}
+					</option>
+				</select>
+			</label>
+		</div>
+		<div class="user-view-paging-page">
+			<div>
+				<div class="user-view-paging-page-previous"
+					 (click)="onPreviousPageClick()"
+					 [class.user-view-paging-page-number-disabled]="page === 1">
+					Previous
+				</div>
+				<div *ngFor="let pageNumber of getPageArray()"
+					 class="user-view-paging-page-number"
+					 [class.user-view-paging-page-number-selected]="pageNumber === page"
+					 (click)="onPageClick(pageNumber)">
+					{{pageNumber}}
+				</div>
+				<div class="user-view-paging-page-next"
+					 (click)="onNextPageClick()"
+					 [class.user-view-paging-page-number-disabled]="page === getTotalPages()">
+					Next
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

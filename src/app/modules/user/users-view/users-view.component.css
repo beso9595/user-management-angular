@@ -30,6 +30,10 @@
 .user-view-table-user-column {
   text-align: left;
 }
+.user-view-table-user-column div {
+  display: flex;
+  flex-direction: column;
+}
 
 .user-view-table-role-column div {
   display: flex;
@@ -83,6 +87,69 @@
 
 .user-view-row-separator {
   opacity: 0.5;
+}
+
+.user-view-inactive {
+  opacity: 0.3;
+}
+
+.user-view-inactive-key {
+  background-color: #dbdbdb !important;
+}
+
+.user-view-paging {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.user-view-paging-page-size, .user-view-paging-page {
+  width: 48%;
+}
+
+.user-view-paging-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.user-view-paging-page div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.user-view-paging-page div div {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.user-view-paging-page-previous, .user-view-paging-page-next {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: center;
+  cursor: pointer;
+}
+
+.user-view-paging-page-number {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.user-view-paging-page-number-selected {
+  background-color: #c6c6c6;
+  box-shadow: 0 3px 6px #00000029;
+  border-radius: 4px;
+}
+
+.user-view-paging-page-number-disabled {
+  opacity: 0.3;
 }
 
 /*# sourceMappingURL=users-view.component.css.map */

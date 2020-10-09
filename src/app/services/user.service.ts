@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from "../models/user/user";
 import {Sort} from "../models/sort";
 import {Role} from "../models/user/role";
+import {UserResponse} from "../models/user/user-response";
 
 @Injectable({
 	providedIn: 'root'
@@ -120,7 +121,7 @@ export class UserService {
 	constructor() {
 	}
 
-	getUsers(pageSize: number, sort: Sort, page: number, searchWord?: string): User[] {
+	getUsers(pageSize: number, sort: Sort, page: number, searchWord?: string): UserResponse {
 		let filteredUserList: User[] = this.userList;
 		if (searchWord) {
 			filteredUserList = this.userList.filter(u => {
@@ -147,8 +148,17 @@ export class UserService {
 			}
 		}
 		//
-
-		return sortedUserList;
+		const max = pageSize * page;
+		const min = max - pageSize;
+		const pagedUserList = sortedUserList.filter((u: User, i: number) => {
+			return i >= min && i < max;
+		});
+		console.log(pagedUserList);
+		//
+		return {
+			list: pagedUserList,
+			total: this.userList.length,
+		};
 	}
 
 	getRoleNameById(roleId: number) {
