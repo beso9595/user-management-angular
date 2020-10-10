@@ -78,7 +78,7 @@
 				Permissions
 			</div>
 			<div class="user-profile-right-permissions-role">
-				{{user?.roleId ? userService.getRoleNameById(user.roleId) : ''}}
+				{{user?.roleId ? userService.getRoleNameById(+userForm.get('roleId').value) : ''}}
 			</div>
 		</div>
 
@@ -88,8 +88,9 @@
 				{{permission.name}}
 			</div>
 			<div>
-				<app-toggle [isActive]="userService.getUserPermissionStatus(user, permission.id)"
-							(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
+				<app-toggle
+					[isActive]="userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id)"
+					(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
 			</div>
 		</div>
 
@@ -101,8 +102,9 @@
 					</b>
 				</div>
 				<div>
-					<app-toggle [isActive]="userService.getUserPermissionGroupStatus(user, permissionGroup.id)"
-								(onChange)="onPermissionGroupStatusChange(permissionGroup.id, $event)"></app-toggle>
+					<app-toggle
+						[isActive]="userService.getUserPermissionGroupStatus(user, +userForm.get('roleId').value, permissionGroup.id)"
+						(onChange)="onPermissionGroupStatusChange(permissionGroup.id, $event)"></app-toggle>
 				</div>
 			</div>
 			<div #content [ngStyle]="{'display': i == 0 ? 'block' : 'none'}">
@@ -112,8 +114,9 @@
 							{{permission.name}}
 						</div>
 						<div>
-							<app-toggle [isActive]="userService.getUserPermissionStatus(user, permission.id)"
-										(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
+							<app-toggle
+								[isActive]="userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id)"
+								(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
 						</div>
 					</div>
 				</div>

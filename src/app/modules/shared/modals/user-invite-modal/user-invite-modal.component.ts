@@ -40,7 +40,7 @@ export class UserInviteModalComponent implements OnInit {
 			firstName: this.userForm.get('firstName').value,
 			lastName: this.userForm.get('lastName').value,
 			email: this.userForm.get('email').value,
-			roleId: parseInt(this.userForm.get('roleId').value, 10),
+			roleId: +this.userForm.get('roleId').value,
 			isActive: false,
 		});
 	}

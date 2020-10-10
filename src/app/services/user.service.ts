@@ -35,6 +35,12 @@ export class UserService {
 				{roleId: 1, permissionId: 2, isActive: true},
 				{roleId: 1, permissionId: 3, isActive: true},
 				{roleId: 1, permissionId: 4, isActive: true},
+
+				{roleId: 1, permissionId: 6, isActive: true},
+				{roleId: 1, permissionId: 7, isActive: true},
+
+				{roleId: 1, permissionId: 14, isActive: true},
+				{roleId: 1, permissionId: 15, isActive: true},
 			]
 		},
 		{
@@ -222,6 +228,18 @@ export class UserService {
 		}
 	}
 
+	updateUser(userData: User): User {
+		const user: User = this.getUserById(userData.id);
+		if (user) {
+			user.firstName = userData.firstName;
+			user.lastName = userData.lastName;
+			user.roleId = userData.roleId;
+			user.customPermissionList = userData.customPermissionList;
+			return user;
+		}
+		return null;
+	}
+
 	deleteUser(userId: number): void {
 		this.userList = this.userList.filter((u: User) => u.id !== userId);
 	}
@@ -230,7 +248,7 @@ export class UserService {
 		return this.roleList;
 	}
 
-	getRoleNameById(roleId: number) {
+	getRoleNameById(roleId: number): string {
 		if (roleId) {
 			const role = this.roleList.find(r => r.id === roleId);
 			return role ? role.name : '';
@@ -253,25 +271,25 @@ export class UserService {
 		return this.permissionList.filter(p => !p.permissionGroupId);
 	}
 
-	getUserPermissionStatus(user: User, permissionId: number): boolean {
+	getUserPermissionStatus(user: User, roleId: number, permissionId: number): boolean {
 		if (user) {
 			let rolePermission: RolePermission;
 			if (user.customPermissionList && user.customPermissionList.length > 0) {
-				rolePermission = this.getRolePermission(user.customPermissionList, user.roleId, permissionId);
+				rolePermission = this.getRolePermission(user.customPermissionList, roleId, permissionId);
 			}
 			if (!rolePermission) {
-				rolePermission = this.getRolePermission(this.rolePermissionList, user.roleId, permissionId);
+				rolePermission = this.getRolePermission(this.rolePermissionList, roleId, permissionId);
 			}
 			return rolePermission ? rolePermission.isActive : false;
 		}
 		return false;
 	}
 
-	getUserPermissionGroupStatus(user: User, permissionGroupId: number): boolean {
+	getUserPermissionGroupStatus(user: User, roleId: number, permissionGroupId: number): boolean {
 		if (user) {
 			const groupPermissionList: Permission[] = this.permissionList.filter(p => p.permissionGroupId === permissionGroupId);
 			const groupPermissionIds: number[] = groupPermissionList.map(p => p.id);
-			let rolePermissionList: RolePermission[] = this.rolePermissionList.filter(rp => groupPermissionIds.includes(rp.permissionId) && rp.roleId === user.roleId);
+			let rolePermissionList: RolePermission[] = this.rolePermissionList.filter(rp => groupPermissionIds.includes(rp.permissionId) && rp.roleId === roleId);
 
 			const rolePermissionKeyValue = new Map();
 			if (user.customPermissionList && user.customPermissionList.length > 0) {

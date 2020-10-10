@@ -5,6 +5,8 @@ import {Subscription} from "rxjs";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {RolePermission} from "../../../models/user/role-permission";
+import {Permission} from "../../../models/user/permission";
 
 @Component({
 	selector: 'app-user-profile',
@@ -17,6 +19,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 	userForm: FormGroup;
 
 	activatedRouteSub: Subscription;
+	userFormRoleIdChangeSub: Subscription;
 
 	constructor(private headerService: HeaderService,
 				private activatedRoute: ActivatedRoute,
@@ -32,7 +35,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 		//
 		this.activatedRouteSub = this.activatedRoute.params.subscribe(params => {
 			if (params && params.id) {
-				const user = this.userService.getUserById(parseInt(params.id, 10));
+				const user = this.userService.getUserById(+params.id);
 				if (user) {
 					this.user = {
 						...user
@@ -54,6 +57,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 			lastName: new FormControl(this.user.lastName, [Validators.required]),
 			roleId: new FormControl(this.user.roleId, [Validators.required]),
 		});
+		this.userFormRoleIdChangeSub = this.userForm.get('roleId').valueChanges.subscribe(() => {
+			this.user.customPermissionList = [];
+		});
 	}
 
 	onUserStatusChange(isActive: boolean): void {
@@ -62,19 +68,55 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 	}
 
 	onSaveUserChangesClick(): void {
-
+		this.user = this.userService.updateUser({
+			...this.user,
+			firstName: this.userForm.get('firstName').value,
+			lastName: this.userForm.get('lastName').value,
+			roleId: +this.userForm.get('roleId').value,
+		});
 	}
 
 	onPermissionStatusChange(permissionId: number, isActive: boolean): void {
-
+		if (this.user.customPermissionList && this.user.customPermissionList.length > 0) {
+			const customPerm: RolePermission = this.user.customPermissionList.find(rp => rp.permissionId === permissionId);
+			if (customPerm) {
+				customPerm.isActive = isActive;
+			} else {
+				this.user.customPermissionList.push({
+					roleId: +this.userForm.get('roleId').value,
+					permissionId,
+					isActive
+				});
+			}
+		} else {
+			this.user.customPermissionList = [
+				{
+					roleId: +this.userForm.get('roleId').value,
+					permissionId,
+					isActive
+				}
+			];
+			this.userService.getUserPermissionStatus(this.user, 1)
+		}
 	}
 
 	onPermissionGroupStatusChange(permissionGroupId: number, isActive: boolean): void {
+		const groupPermissionList: Permission[] = this.userService.getPermissions().filter(p => p.permissionGroupId === permissionGroupId);
+		const groupPermissionIds: number[] = groupPermissionList.map(p => p.id);
+		this.user.customPermissionList = (this.user.customPermissionList || []).filter(rp => !groupPermissionIds.includes(rp.permissionId));
 
+		groupPermissionIds.forEach(pId => {
+			this.user.customPermissionList.push({
+				roleId: +this.userForm.get('roleId').value,
+				permissionId: pId,
+				isActive,
+			});
+		});
 	}
 
 	ngOnDestroy(): void {
 		this.activatedRouteSub.unsubscribe();
+		this.userFormRoleIdChangeSub.unsubscribe();
 	}
 
 }
