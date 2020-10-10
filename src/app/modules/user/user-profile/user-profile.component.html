@@ -129,7 +129,7 @@
 
 		<ng-container *ngFor="let permissionGroup of userService.getPermissionGroups(); index as i;">
 			<div [class.user-inactive-mask]="!user?.isActive">
-				<div style="display: flex; flex-direction: row; justify-content: space-between;">
+				<div class="permission-container">
 					<div class="permission-group-header"
 						 (click)="content.style.display = content.style.display === 'none' ? 'block' : 'none'; expand.className = content.style.display === 'none' ? '' : 'permission-group-expand-icon-rotated'">
 						<img #expand
@@ -148,7 +148,7 @@
 				</div>
 				<div #content [ngStyle]="{'display': i === 0 ? 'block' : 'none', 'margin-top': '30px'}">
 					<div *ngFor="let permission of userService.getPermissions(permissionGroup.id)">
-						<div style="display: flex; flex-direction: row; justify-content: space-between;">
+						<div class="permission-container">
 							<div class="permission-row-name">
 								<span class="circle"
 									  [ngStyle]="{'color': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? '#44a0d3' : '#fd0d00'}"></span>

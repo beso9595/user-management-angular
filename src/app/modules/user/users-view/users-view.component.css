@@ -195,4 +195,8 @@
   opacity: 0.3;
 }
 
+select:focus {
+  outline: none;
+}
+
 /*# sourceMappingURL=users-view.component.css.map */

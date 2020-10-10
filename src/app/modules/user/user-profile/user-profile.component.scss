@@ -265,4 +265,11 @@ input:focus, select:focus {
 .user-inactive-mask {
 	opacity: 0.2;
 	pointer-events: none;
+	user-select: none;
+}
+
+.permission-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }

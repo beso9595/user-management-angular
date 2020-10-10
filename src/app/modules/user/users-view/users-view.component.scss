@@ -172,6 +172,7 @@
 
 .user-view-paging-page-size, .user-view-paging-page {
 	width: 48%;
+
 	select {
 		border: none;
 		color: #000000;
@@ -227,4 +228,8 @@
 
 .user-view-paging-page-number-disabled {
 	opacity: 0.3;
+}
+
+select:focus {
+	outline: none;
 }
