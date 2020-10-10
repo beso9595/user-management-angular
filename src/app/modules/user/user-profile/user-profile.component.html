@@ -6,10 +6,10 @@
 			</div>
 			<img alt="avatar" src="../../../../assets/images/avatar.png">
 		</div>
-		<div class="user-profile-left-photo-upload">
+		<div class="user-profile-left-photo-upload" [class.text-transparent]="!user?.isActive">
 			UPLOAD A PHOTO
 		</div>
-		<div class="user-profile-left-user-name">
+		<div class="user-profile-left-user-name" [class.user-inactive-mask]="!user?.isActive">
 			<div>
 				{{user?.firstName}}
 			</div>
@@ -17,11 +17,11 @@
 				{{user?.lastName}}
 			</div>
 		</div>
-		<div class="user-profile-left-email">
+		<div class="user-profile-left-email" [class.user-inactive-mask]="!user?.isActive">
 			{{user?.email}}
 		</div>
 		<div style="text-align: center;">
-			<button class="resend-invite-button">
+			<button *ngIf="user?.isActive" class="resend-invite-button">
 				Resend the invite
 			</button>
 		</div>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<form [formGroup]="userForm">
-			<div class="form">
+			<div class="form" [class.user-inactive-mask]="!user?.isActive">
 				<div class="form-row">
 					<label for="firstName" class="form-field-label"
 						   [class.text-transparent]="!userForm.get('firstName').value">
@@ -90,7 +90,8 @@
 					</div>
 				</div>
 				<div class="user-form-control">
-					<button (click)="onSaveUserChangesClick()"
+					<button *ngIf="user?.isActive"
+							(click)="onSaveUserChangesClick()"
 							[class.save-changes-disabled]="!userForm.valid"
 							class="save-changes-button"
 							[disabled]="!userForm.valid">
@@ -105,13 +106,13 @@
 			<div class="user-profile-right-permissions-title">
 				Permissions
 			</div>
-			<div class="user-profile-right-permissions-role">
+			<div class="user-profile-right-permissions-role" [class.user-inactive-mask]="!user?.isActive">
 				{{user?.roleId ? userService.getRoleNameById(+userForm.get('roleId').value) : ''}}
 			</div>
 		</div>
 
 		<ng-container *ngFor="let permission of userService.getPermissionsWithoutGroup()">
-			<div class="user-profile-right-permission-list">
+			<div class="user-profile-right-permission-list" [class.user-inactive-mask]="!user?.isActive">
 				<div class="user-profile-right-permissions-list-title">
 					{{permission.name}}
 				</div>
@@ -127,7 +128,7 @@
 		</ng-container>
 
 		<ng-container *ngFor="let permissionGroup of userService.getPermissionGroups(); index as i;">
-			<div>
+			<div [class.user-inactive-mask]="!user?.isActive">
 				<div style="display: flex; flex-direction: row; justify-content: space-between;">
 					<div class="permission-group-header"
 						 (click)="content.style.display = content.style.display === 'none' ? 'block' : 'none'; expand.className = content.style.display === 'none' ? '' : 'permission-group-expand-icon-rotated'">

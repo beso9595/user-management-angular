@@ -261,3 +261,8 @@ input:focus, select:focus {
 .permission-row-name {
 	margin-left: 20px;
 }
+
+.user-inactive-mask {
+	opacity: 0.2;
+	pointer-events: none;
+}

@@ -247,4 +247,9 @@ input:focus, select:focus {
   margin-left: 20px;
 }
 
+.user-inactive-mask {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 /*# sourceMappingURL=user-profile.component.css.map */
