@@ -85,46 +85,63 @@
 			</div>
 		</div>
 
-		<div *ngFor="let permission of userService.getPermissionsWithoutGroup()"
-			 class="user-profile-right-permission-list">
-			<div class="user-profile-right-permissions-list-title">
-				{{permission.name}}
-			</div>
-			<div>
-				<app-toggle
-					[isActive]="userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id)"
-					(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
-			</div>
-		</div>
-
-		<div *ngFor="let permissionGroup of userService.getPermissionGroups(); index as i;">
-			<div style="display: flex; flex-direction: row; justify-content: space-between;">
-				<div (click)="content.style.display = content.style.display === 'none' ? 'block' : 'none'">
-					<b>
-						{{permissionGroup.name}}
-					</b>
+		<ng-container *ngFor="let permission of userService.getPermissionsWithoutGroup()">
+			<div class="user-profile-right-permission-list">
+				<div class="user-profile-right-permissions-list-title">
+					{{permission.name}}
 				</div>
 				<div>
 					<app-toggle
-						[isActive]="userService.getUserPermissionGroupStatus(user, +userForm.get('roleId').value, permissionGroup.id)"
-						(onChange)="onPermissionGroupStatusChange(permissionGroup.id, $event)"></app-toggle>
+						[isActive]="userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id)"
+						(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
 				</div>
 			</div>
-			<div #content [ngStyle]="{'display': i == 0 ? 'block' : 'none'}">
-				<div *ngFor="let permission of userService.getPermissions(permissionGroup.id)">
-					<div style="display: flex; flex-direction: row; justify-content: space-between;">
-						<div>
-							{{permission.name}}
-						</div>
-						<div>
-							<app-toggle
-								[isActive]="userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id)"
-								(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
+			<div class="permission-row-separator">
+				<div></div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngFor="let permissionGroup of userService.getPermissionGroups(); index as i;">
+			<div>
+				<div style="display: flex; flex-direction: row; justify-content: space-between;">
+					<div class="permission-group-header"
+						 (click)="content.style.display = content.style.display === 'none' ? 'block' : 'none'; expand.className = content.style.display === 'none' ? '' : 'permission-group-expand-icon-rotated'">
+						<img #expand
+							 [ngClass]="{'permission-group-expand-icon-rotated': i === 0}"
+							 alt="expand"
+							 src="../../../../assets/images/icons/arrow_down.png">
+						<b>
+							{{permissionGroup.name}}
+						</b>
+					</div>
+					<div>
+						<app-toggle
+							[isActive]="userService.getUserPermissionGroupStatus(user, +userForm.get('roleId').value, permissionGroup.id)"
+							(onChange)="onPermissionGroupStatusChange(permissionGroup.id, $event)"></app-toggle>
+					</div>
+				</div>
+				<div #content [ngStyle]="{'display': i === 0 ? 'block' : 'none', 'margin-top': '30px'}">
+					<div *ngFor="let permission of userService.getPermissions(permissionGroup.id)">
+						<div style="display: flex; flex-direction: row; justify-content: space-between;">
+							<div class="permission-row-name">
+								<span class="circle" [ngStyle]="{'color': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? '#44a0d3' : '#fd0d00'}"></span>
+								<span [ngStyle]="{'font-weight': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? 'bold' : ''}">
+									{{permission.name}}
+								</span>
+							</div>
+							<div>
+								<app-toggle
+									[isActive]="userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id)"
+									(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<div class="permission-row-separator">
+				<div></div>
+			</div>
+		</ng-container>
 
 	</div>
 </div>
