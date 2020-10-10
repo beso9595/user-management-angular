@@ -1,12 +1,18 @@
 <div class="header-main">
 	<div class="header-content">
 		<div class="header-title">{{title}}</div>
-		<input *ngIf="showSearch" type="text" (keyup)="onSearchChange($event)">
+		<label *ngIf="showSearch">
+			<input placeholder="Type to filter the table"
+				   type="text"
+				   (keyup)="onSearchChange($event)">
+		</label>
 	</div>
 </div>
 <div *ngIf="showButton"
 	 (click)="onButtonClick()"
 	 class="header-button"
 	 [class.header-button-enabled]="disableButton">
-	<img alt="icon" src="../../../../assets/images/icons/{{buttonIcon}}.png">
+	<div>
+		<img alt="icon" src="../../../../assets/images/icons/{{buttonIcon}}.png">
+	</div>
 </div>

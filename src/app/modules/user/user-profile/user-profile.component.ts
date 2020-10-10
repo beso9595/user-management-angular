@@ -96,7 +96,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 					isActive
 				}
 			];
-			this.userService.getUserPermissionStatus(this.user, 1)
 		}
 	}
 

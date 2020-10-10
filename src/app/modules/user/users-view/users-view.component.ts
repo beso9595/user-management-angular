@@ -106,7 +106,6 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 		this.showUserInviteModal = true;
 		//
 		this.userInviteModalConfirmSub = this.modalService.confirmUserInviteModal$.subscribe((user: User) => {
-			console.log(user);
 			this.userService.addUser(user);
 			this.loadUsers();
 			this.onUserInviteModalClose();
