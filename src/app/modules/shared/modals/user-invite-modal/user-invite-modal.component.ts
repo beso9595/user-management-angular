@@ -26,12 +26,12 @@ export class UserInviteModalComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	getError(): string {
-		if (this.userForm.valid) {
-			return 'Good to go';
-		} else {
-			return this.userForm.get('email').hasError('pattern') ? 'Incorrect Email pattern' : 'Fill in all the fields';
-		}
+	hasError(fieldName: string): boolean {
+		return (this.userForm.get(fieldName).touched || this.userForm.get(fieldName).dirty) && !this.userForm.get(fieldName).valid;
+	}
+
+	hasRequireError(fieldName: string): boolean {
+		return this.userForm.get(fieldName).hasError('required');
 	}
 
 	onSendUserInvitationClick(): void {

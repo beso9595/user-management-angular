@@ -67,6 +67,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 		this.user.isActive = isActive;
 	}
 
+	hasError(fieldName: string): boolean {
+		return (this.userForm.get(fieldName).touched || this.userForm.get(fieldName).dirty) && !this.userForm.get(fieldName).valid;
+	}
+
 	onSaveUserChangesClick(): void {
 		this.user = this.userService.updateUser({
 			...this.user,

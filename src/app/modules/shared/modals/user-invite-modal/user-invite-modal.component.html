@@ -1,44 +1,91 @@
 <form [formGroup]="userForm">
 	<div class="invite-user-main">
 		<div class="invite-user-row">
-			<img alt="user" src="../../../../../assets/images/icons/user.png">
+			<div class="form-field-icon">
+				<img alt="user" src="../../../../../assets/images/icons/user.png">
+			</div>
 
 			<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
-				<label>
-					<input type="text"
+				<div>
+					<label for="firstName" class="form-field-label" [class.text-transparent]="!firstName.value">
+						* First Name
+					</label>
+					<input #firstName
+						   type="text"
+						   class="form-field"
+						   [class.form-field-error-border]="hasError('firstName')"
+						   id="firstName"
 						   placeholder="* First Name"
 						   formControlName="firstName">
-				</label>
-				<label>
-					<input type="text"
+					<div class="form-field-error" [class.text-transparent]="!hasError('firstName')">
+						Field is required
+					</div>
+				</div>
+				<div>
+					<label for="lastName" class="form-field-label" [class.text-transparent]="!lastName.value">
+						* Last Name
+					</label>
+					<input #lastName
+						   type="text"
+						   class="form-field"
+						   [class.form-field-error-border]="hasError('lastName')"
+						   id="lastName"
 						   placeholder="* Last Name"
 						   formControlName="lastName">
-				</label>
+					<div class="form-field-error" [class.text-transparent]="!hasError('lastName')">
+						Field is required
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="invite-user-row">
-			<img alt="user" src="../../../../../assets/images/icons/email.png">
+			<div class="form-field-icon">
+				<img alt="user" src="../../../../../assets/images/icons/email.png">
+			</div>
 
 			<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
-				<label style="width: 100%;">
-					<input type="text"
+				<div style="width: 100%;">
+					<label for="email" class="form-field-label" [class.text-transparent]="!email.value">
+						* Email
+					</label>
+					<input #email
+						   type="text"
+						   class="form-field"
+						   [class.form-field-error-border]="hasError('email')"
 						   style="width: 100%;"
+						   id="email"
 						   placeholder="* Email"
 						   formControlName="email">
-				</label>
+					<div class="form-field-error" [class.text-transparent]="!hasError('email')">
+						{{hasError('email') ? (hasRequireError('email') ? 'Field is required' : 'Incorrect Email pattern') : 'asd'}}
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="invite-user-row invite-user-row-left">
-			<img alt="user" src="../../../../../assets/images/icons/key_black.png">
+			<div class="form-field-icon">
+				<img alt="user" src="../../../../../assets/images/icons/key_black.png">
+			</div>
 
 			<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
-				<label style="width: 100%;">
-					<select formControlName="roleId" style="width: 50%;">
+				<div style="width: 50%;">
+					<label for="roleId" class="form-field-label" [class.text-transparent]="!roleId.value">
+						* Role
+					</label>
+					<select #roleId
+							formControlName="roleId"
+							id="roleId"
+							class="form-field"
+							[class.form-field-error-border]="hasError('roleId')"
+							style="width: 100%;">
 						<option *ngFor="let role of userService.getRoles()" [value]="role.id">
 							{{role.name}}
 						</option>
 					</select>
-				</label>
+					<div class="form-field-error" [class.text-transparent]="!hasError('roleId')">
+						Field is required
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="invite-user-row invite-user-row-control">
@@ -49,7 +96,7 @@
 			</button>
 			<div *ngIf="userForm.touched || userForm.dirty"
 				 [ngClass]="{'user-invite-valid': userForm.valid, 'user-invite-error': !userForm.valid}">
-				{{getError()}}
+				{{userForm.valid ? 'Good to go' : 'Fill in all the fields'}}
 			</div>
 		</div>
 	</div>

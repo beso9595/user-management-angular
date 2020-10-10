@@ -43,27 +43,51 @@
 		<form [formGroup]="userForm">
 			<div class="form">
 				<div class="form-row">
-					<label>
-						<input type="text"
-							   placeholder="* First Name"
-							   formControlName="firstName">
+					<label for="firstName" class="form-field-label"
+						   [class.text-transparent]="!userForm.get('firstName').value">
+						* First Name
 					</label>
+					<input type="text"
+						   class="form-field"
+						   [class.form-field-error-border]="hasError('firstName')"
+						   id="firstName"
+						   placeholder="* First Name"
+						   formControlName="firstName">
+					<div class="form-field-error" [class.text-transparent]="!hasError('firstName')">
+						Field is required
+					</div>
 				</div>
 				<div class="form-row">
-					<label>
-						<input type="text"
-							   placeholder="* Last Name"
-							   formControlName="lastName">
+					<label for="lastName" class="form-field-label"
+						   [class.text-transparent]="!userForm.get('lastName').value">
+						* Last Name
 					</label>
+					<input type="text"
+						   class="form-field"
+						   [class.form-field-error-border]="hasError('lastName')"
+						   id="lastName"
+						   placeholder="* Last Name"
+						   formControlName="lastName">
+					<div class="form-field-error" [class.text-transparent]="!hasError('lastName')">
+						Field is required
+					</div>
 				</div>
 				<div class="form-row">
-					<label>
-						<select formControlName="roleId">
-							<option *ngFor="let role of userService.getRoles()" [value]="role.id">
-								{{role.name}}
-							</option>
-						</select>
+					<label for="roleId" class="form-field-label"
+						   [class.text-transparent]="!userForm.get('roleId').value">
+						* Role
 					</label>
+					<select formControlName="roleId"
+							id="roleId"
+							class="form-field"
+							[class.form-field-error-border]="hasError('roleId')">
+						<option *ngFor="let role of userService.getRoles()" [value]="role.id">
+							{{role.name}}
+						</option>
+					</select>
+					<div class="form-field-error" [class.text-transparent]="!hasError('roleId')">
+						Field is required
+					</div>
 				</div>
 				<div class="user-form-control">
 					<button (click)="onSaveUserChangesClick()"
@@ -125,8 +149,10 @@
 					<div *ngFor="let permission of userService.getPermissions(permissionGroup.id)">
 						<div style="display: flex; flex-direction: row; justify-content: space-between;">
 							<div class="permission-row-name">
-								<span class="circle" [ngStyle]="{'color': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? '#44a0d3' : '#fd0d00'}"></span>
-								<span [ngStyle]="{'font-weight': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? 'bold' : ''}">
+								<span class="circle"
+									  [ngStyle]="{'color': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? '#44a0d3' : '#fd0d00'}"></span>
+								<span
+									[ngStyle]="{'font-weight': userService.getUserPermissionStatus(user, +userForm.get('roleId').value, permission.id) ? 'bold' : ''}">
 									{{permission.name}}
 								</span>
 							</div>

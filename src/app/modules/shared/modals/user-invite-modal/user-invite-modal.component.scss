@@ -52,7 +52,7 @@ input, select {
 	box-sizing: border-box;
 	border: none;
 	border-bottom: 2px solid #c6c6c6;
-	background-color: #ffffff;
+	background-color: transparent;
 	font-size: 16px;
 }
 
@@ -64,4 +64,38 @@ input:focus, select:focus {
 	background-color: #c6c6c6;
 	color: #999999;
 	cursor: default;
+}
+
+.form-field-icon {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form-field-label {
+	order: -1;
+	font: normal normal 600 12px/16px Segoe UI;
+	letter-spacing: 0;
+	color: #33A3DC;
+}
+
+.form-field {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.form-field-error {
+	order: 1;
+	font: normal normal 600 12px/16px Segoe UI;
+	letter-spacing: 0;
+	color: #FF0000;
+}
+
+.form-field-error-border {
+	border-bottom-color: #FF0000;
+}
+
+.text-transparent {
+	color: transparent;
+	user-select: none;
 }
