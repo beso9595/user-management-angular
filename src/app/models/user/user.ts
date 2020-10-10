@@ -1,3 +1,5 @@
+import {RolePermission} from "./role-permission";
+
 export interface User {
 	id: number,
 	firstName: string,
@@ -5,4 +7,5 @@ export interface User {
 	email: string,
 	isActive: boolean,
 	roleId: number,
+	customPermissionList?: RolePermission[],
 }

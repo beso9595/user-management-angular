@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user/user";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
 	selector: 'app-user-profile',
@@ -13,13 +14,14 @@ import {User} from "../../../models/user/user";
 export class UserProfileComponent implements OnInit, OnDestroy {
 
 	user: User;
+	userForm: FormGroup;
 
 	activatedRouteSub: Subscription;
 
 	constructor(private headerService: HeaderService,
 				private activatedRoute: ActivatedRoute,
 				private router: Router,
-				private userService: UserService) {
+				public userService: UserService) {
 		this.headerService.updateHeader({
 			title: 'User Setup',
 			showSearch: false,
@@ -32,7 +34,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 			if (params && params.id) {
 				const user = this.userService.getUserById(parseInt(params.id, 10));
 				if (user) {
-					this.user = user;
+					this.user = {
+						...user
+					};
+					this.init();
 					return;
 				}
 			}
@@ -43,8 +48,29 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 	}
 
+	init(): void {
+		this.userForm = new FormGroup({
+			firstName: new FormControl(this.user.firstName, [Validators.required]),
+			lastName: new FormControl(this.user.lastName, [Validators.required]),
+			roleId: new FormControl(this.user.roleId, [Validators.required]),
+		});
+	}
+
 	onUserStatusChange(): void {
+		this.userService.updateUserStatus(this.user.id, !this.user.isActive);
 		this.user.isActive = !this.user.isActive;
+	}
+
+	onSaveUserChangesClick(): void {
+
+	}
+
+	onPermissionStatusChange(permissionId: number): void {
+
+	}
+
+	onPermissionGroupStatusChange(permissionGroupId: number): void {
+
 	}
 
 	ngOnDestroy(): void {

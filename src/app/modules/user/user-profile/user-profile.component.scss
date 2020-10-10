@@ -7,6 +7,7 @@
 .user-profile-left {
 	display: flex;
 	flex-direction: column;
+	width: 20%;
 }
 
 .user-profile-left-photo-upload {
@@ -38,9 +39,10 @@
 .user-profile-center {
 	display: flex;
 	flex-direction: column;
+	width: 30%;
 }
 
-.user-profile-center-details {
+.user-profile-center-title {
 	text-align: left;
 	font: normal normal 600 36px/48px Segoe UI;
 	letter-spacing: 0;
@@ -62,4 +64,42 @@
 			font: normal normal bold 16px/21px Segoe UI;
 		}
 	}
+}
+
+//
+
+.user-profile-right {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+}
+
+.user-profile-right-permissions {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.user-profile-right-permissions-title {
+	font: normal normal 600 36px/48px Segoe UI;
+	letter-spacing: 0;
+	color: #000000;
+}
+
+.user-profile-right-permissions-role {
+	font: normal normal 300 16px/21px Segoe UI;
+	letter-spacing: 0;
+	color: #000000;
+}
+
+.user-profile-right-permission-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.user-profile-right-permission-list-title {
+	font: normal normal bold 16px/21px Segoe UI;
+	letter-spacing: 0px;
+	color: #000000;
 }

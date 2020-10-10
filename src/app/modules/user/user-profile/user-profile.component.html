@@ -1,6 +1,8 @@
 <div class="user-profile-container">
 	<div class="user-profile-left">
-		<img alt="avatar" src="../../../../assets/images/avatar.png">
+		<div style="text-align: center;">
+			<img alt="avatar" src="../../../../assets/images/avatar.png">
+		</div>
 		<div class="user-profile-left-photo-upload">
 			UPLOAD A PHOTO
 		</div>
@@ -35,6 +37,93 @@
 			</span>
 			</div>
 		</div>
+		<div>
+			<form [formGroup]="userForm">
+				<div>
+					<label>
+						<input type="text"
+							   placeholder="* First Name"
+							   formControlName="firstName">
+					</label>
+				</div>
+				<div>
+					<label>
+						<input type="text"
+							   placeholder="* Last Name"
+							   formControlName="lastName">
+					</label>
+				</div>
+				<div>
+					<label>
+						<select formControlName="roleId">
+							<option *ngFor="let role of userService.getRoles()" [value]="role.id">
+								{{role.name}}
+							</option>
+						</select>
+					</label>
+				</div>
+				<div>
+					<button (click)="onSaveUserChangesClick()" [disabled]="!userForm.valid">
+						Save Changes
+					</button>
+					<!--					<div *ngIf="userForm.touched || userForm.dirty"-->
+					<!--						 [ngClass]="{'user-invite-valid': userForm.valid, 'user-invite-error': !userForm.valid}">-->
+					<!--						{{getError()}}-->
+					<!--					</div>-->
+				</div>
+			</form>
+		</div>
 	</div>
-	<div>3</div>
+	<div class="user-profile-right">
+		<div class="user-profile-right-permissions">
+			<div class="user-profile-right-permissions-title">
+				Permissions
+			</div>
+			<div class="user-profile-right-permissions-role">
+				{{user?.roleId ? userService.getRoleNameById(user.roleId) : ''}}
+			</div>
+		</div>
+
+		<div *ngFor="let permission of userService.getPermissionsWithoutGroup()"
+			 class="user-profile-right-permission-list">
+			<div class="user-profile-right-permissions-list-title">
+				{{permission.name}}
+			</div>
+			<div>
+				<img alt="toggle"
+					 (click)="onPermissionStatusChange(permission.id)"
+					 src="../../../../assets/images/toggle_{{userService.getUserPermissionStatus(user, permission.id) ? 'on' : 'off'}}.png">
+			</div>
+		</div>
+
+		<div *ngFor="let permissionGroup of userService.getPermissionGroups(); index as i;">
+			<div style="display: flex; flex-direction: row; justify-content: space-between;">
+				<div (click)="content.style.display = content.style.display === 'none' ? 'block' : 'none'">
+					<b>
+						{{permissionGroup.name}}
+					</b>
+				</div>
+				<div>
+					<img alt="toggle"
+						 (click)="onPermissionGroupStatusChange(permissionGroup.id)"
+						 src="../../../../assets/images/toggle_{{userService.getUserPermissionGroupStatus(user, permissionGroup.id) ? 'on' : 'off'}}.png">
+				</div>
+			</div>
+			<div #content [ngStyle]="{'display': i == 0 ? 'block' : 'none'}">
+				<div *ngFor="let permission of userService.getPermissions(permissionGroup.id)">
+					<div style="display: flex; flex-direction: row; justify-content: space-between;">
+						<div>
+							{{permission.name}}
+						</div>
+						<div>
+							<img alt="toggle"
+								 (click)="onPermissionStatusChange(permission.id)"
+								 src="../../../../assets/images/toggle_{{userService.getUserPermissionStatus(user, permission.id) ? 'on' : 'off'}}.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

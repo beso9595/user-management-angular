@@ -3,6 +3,9 @@ import {User} from "../models/user/user";
 import {Sort} from "../models/sort";
 import {Role} from "../models/user/role";
 import {UserResponse} from "../models/user/user-response";
+import {Permission} from "../models/user/permission";
+import {PermissionGroup} from "../models/user/permission-group";
+import {RolePermission} from "../models/user/role-permission";
 
 @Injectable({
 	providedIn: 'root'
@@ -27,6 +30,12 @@ export class UserService {
 			email: 'danniel.blichman@test.com',
 			isActive: true,
 			roleId: 1,
+			customPermissionList: [
+				{roleId: 1, permissionId: 1, isActive: true},
+				{roleId: 1, permissionId: 2, isActive: true},
+				{roleId: 1, permissionId: 3, isActive: true},
+				{roleId: 1, permissionId: 4, isActive: true},
+			]
 		},
 		{
 			id: 2,
@@ -117,8 +126,38 @@ export class UserService {
 			roleId: 2,
 		},
 	];
+	private permissionGroupList: PermissionGroup[] = [
+		{id: 1, name: 'Permission group 1'},
+		{id: 2, name: 'Permission group 2'},
+		{id: 3, name: 'Permission group 3'},
+	];
+	private permissionList: Permission[] = [
+		{id: 1, name: 'Permission 1', permissionGroupId: 1},
+		{id: 2, name: 'Permission 2', permissionGroupId: 1},
+		{id: 3, name: 'Permission 3', permissionGroupId: 1},
+		{id: 4, name: 'Permission 4', permissionGroupId: 1},
+		{id: 5, name: 'Permission 5', permissionGroupId: 1},
+		{id: 6, name: 'Permission 6', permissionGroupId: 2},
+		{id: 7, name: 'Permission 7', permissionGroupId: 2},
+		{id: 8, name: 'Permission 8', permissionGroupId: 2},
+		{id: 9, name: 'Permission 9', permissionGroupId: 2},
+		{id: 10, name: 'Permission 10', permissionGroupId: 2},
+		{id: 11, name: 'Permission 11', permissionGroupId: 3},
+		{id: 12, name: 'Permission 12', permissionGroupId: 3},
+		{id: 13, name: 'Permission 13', permissionGroupId: 3},
+		{id: 14, name: 'Permission 14', permissionGroupId: 3},
+		{id: 15, name: 'Permission 15', permissionGroupId: 3},
+		{id: 16, name: 'Super Admin'},
+	];
+	private rolePermissionList: RolePermission[] = [];
 
 	constructor() {
+		//populate records
+		this.permissionList.forEach((p, i) => {
+			this.roleList.forEach((r, j) => {
+				this.rolePermissionList.push({roleId: r.id, permissionId: p.id, isActive: (i + j) % 2 === 1});
+			});
+		});
 	}
 
 	getUsers(pageSize: number, sort: Sort, page: number, searchWord?: string): UserResponse {
@@ -176,6 +215,13 @@ export class UserService {
 		});
 	}
 
+	updateUserStatus(userId: number, status: boolean): void {
+		const user: User = this.getUserById(userId);
+		if (user) {
+			user.isActive = status;
+		}
+	}
+
 	deleteUser(userId: number): void {
 		this.userList = this.userList.filter((u: User) => u.id !== userId);
 	}
@@ -190,6 +236,61 @@ export class UserService {
 			return role ? role.name : '';
 		}
 		return '';
+	}
+
+	getPermissionGroups(): PermissionGroup[] {
+		return this.permissionGroupList;
+	}
+
+	getPermissions(groupId?: number): Permission[] {
+		if (groupId) {
+			return this.permissionList.filter(p => p.permissionGroupId === groupId);
+		}
+		return this.permissionList;
+	}
+
+	getPermissionsWithoutGroup(): Permission[] {
+		return this.permissionList.filter(p => !p.permissionGroupId);
+	}
+
+	getUserPermissionStatus(user: User, permissionId: number): boolean {
+		if (user) {
+			let rolePermission: RolePermission;
+			if (user.customPermissionList && user.customPermissionList.length > 0) {
+				rolePermission = this.getRolePermission(user.customPermissionList, user.roleId, permissionId);
+			}
+			if (!rolePermission) {
+				rolePermission = this.getRolePermission(this.rolePermissionList, user.roleId, permissionId);
+			}
+			return rolePermission ? rolePermission.isActive : false;
+		}
+		return false;
+	}
+
+	getUserPermissionGroupStatus(user: User, permissionGroupId: number): boolean {
+		if (user) {
+			const groupPermissionList: Permission[] = this.permissionList.filter(p => p.permissionGroupId === permissionGroupId);
+			const groupPermissionIds: number[] = groupPermissionList.map(p => p.id);
+			let rolePermissionList: RolePermission[] = this.rolePermissionList.filter(rp => groupPermissionIds.includes(rp.permissionId) && rp.roleId === user.roleId);
+
+			const keyValue = new Map();
+			if (user.customPermissionList && user.customPermissionList.length > 0) {
+				const customRolePermissionList: RolePermission[] = user.customPermissionList.filter(rp => groupPermissionIds.includes(rp.permissionId));
+				if (customRolePermissionList && customRolePermissionList.length > 0) {
+					customRolePermissionList.forEach(rp => {
+						keyValue.set(rp.permissionId, rp.isActive);
+					});
+				}
+			}
+			//
+			return rolePermissionList.every(rp => keyValue.has(rp.permissionId) ? keyValue.get(rp.permissionId) : rp.isActive);
+		}
+		return false;
+	}
+
+	private getRolePermission(rolePermissionList: RolePermission[], roleId: number, permissionId: number): RolePermission {
+		const rolePermission: RolePermission = rolePermissionList.find(r => r.roleId === roleId && r.permissionId === permissionId);
+		return rolePermission || null;
 	}
 
 	private static sortByFullName(a: User, b: User): number {

@@ -1,5 +1,5 @@
 export interface Permission {
 	id: number,
 	name: string,
-	permissionGroupId: number,
+	permissionGroupId?: number,
 }
