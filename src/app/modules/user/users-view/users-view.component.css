@@ -70,6 +70,11 @@
   border-radius: 30px;
   margin-right: 20px;
 }
+.user-view-table-role-column div div div img {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+}
 
 .user-view-table-status-column img {
   width: fit-content;

@@ -35,6 +35,9 @@
   background: #305ECA 0 0 no-repeat padding-box;
   text-align: center;
 }
+.header-button img {
+  width: 50%;
+}
 
 .header-button-enabled {
   cursor: default;

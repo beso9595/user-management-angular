@@ -28,10 +28,40 @@
 }
 
 .user-profile-left-email {
-	font: normal normal 300 16px/21px Segoe UI;
+	font: normal normal 300 14px/21px Segoe UI;
 	color: #000000;
 	text-align: center;
 	margin-top: 20px;
+}
+
+.admin-badge {
+	width: 60px;
+	position: absolute;
+	height: 35px;
+	background-color: #7E7EF1;
+	border-radius: 30px;
+	margin-left: 190px;
+	margin-top: 150px;
+	margin-right: 20px;
+
+	img {
+		width: 20px;
+		height: 20px;
+		padding: 7px;
+	}
+}
+
+.resend-invite-button {
+	margin-top: 50px;
+	width: 180px;
+	background-color: #7e7ef1;
+	padding: 10px 20px 10px 20px;
+	color: white;
+	font: normal normal 600 14px/21px Segoe UI;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	cursor: pointer;
 }
 
 //
@@ -52,7 +82,7 @@
 .user-profile-center-status {
 	display: flex;
 	flex-direction: row;
-
+	margin-top: 40px;
 
 	div {
 		font: normal normal 300 16px/21px Segoe UI;
@@ -61,6 +91,60 @@
 			font: normal normal bold 16px/21px Segoe UI;
 		}
 	}
+}
+
+.user-profile-center-status {
+	div:first-child{
+		margin-left: -50px;
+		margin-right: 10px;
+	}
+}
+
+.form {
+	margin-top: 40px;
+}
+
+.form-row {
+	margin-bottom: 40px;
+
+	label {
+		width: 100%;
+
+		input, select {
+			width: 70%;
+		}
+	}
+}
+
+input, select {
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid #c6c6c6;
+	background-color: transparent;
+	font-size: 16px;
+}
+
+input:focus, select:focus {
+	outline: none;
+}
+
+.user-form-control {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 156px;
+}
+
+.save-changes-button {
+	width: 150px;
+	background-color: #44A0D3;
+	padding: 10px 20px 10px 20px;
+	color: white;
+	font: normal normal 600 14px/21px Segoe UI;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	cursor: pointer;
 }
 
 //

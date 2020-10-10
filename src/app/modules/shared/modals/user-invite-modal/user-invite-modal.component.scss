@@ -56,6 +56,11 @@ input, select {
 	font-size: 16px;
 }
 
-input:focus {
+input:focus, select:focus {
 	outline: none;
+}
+
+.invite-user-confirm-disabled {
+	background-color: #c6c6c6;
+	color: #999999;
 }

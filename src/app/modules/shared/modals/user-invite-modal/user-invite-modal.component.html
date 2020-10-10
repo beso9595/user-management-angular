@@ -42,7 +42,9 @@
 			</div>
 		</div>
 		<div class="invite-user-row invite-user-row-control">
-			<button (click)="onSendUserInvitationClick()" [disabled]="!userForm.valid">
+			<button (click)="onSendUserInvitationClick()"
+					[class.invite-user-confirm-disabled]="!userForm.valid"
+					[disabled]="!userForm.valid">
 				Send Invitation
 			</button>
 			<div *ngIf="userForm.touched || userForm.dirty"

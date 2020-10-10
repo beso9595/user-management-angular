@@ -1,6 +1,9 @@
 <div class="user-profile-container">
 	<div class="user-profile-left">
 		<div style="text-align: center;">
+			<div *ngIf="user?.roleId === 1" class="admin-badge">
+				<img alt="key" src="../../../../assets/images/icons/key_white.png">
+			</div>
 			<img alt="avatar" src="../../../../assets/images/avatar.png">
 		</div>
 		<div class="user-profile-left-photo-upload">
@@ -18,7 +21,7 @@
 			{{user?.email}}
 		</div>
 		<div style="text-align: center;">
-			<button>
+			<button class="resend-invite-button">
 				Resend the invite
 			</button>
 		</div>
@@ -28,30 +31,32 @@
 			Details
 		</div>
 		<div class="user-profile-center-status">
-			<app-toggle [isActive]="user?.isActive" (onChange)="onUserStatusChange($event)"></app-toggle>
+			<div>
+				<app-toggle [isActive]="user?.isActive" (onChange)="onUserStatusChange($event)"></app-toggle>
+			</div>
 			<div>
 				The user is <span>
 				{{user?.isActive ? 'Active' : 'Inactive'}}
 			</span>
 			</div>
 		</div>
-		<div>
-			<form [formGroup]="userForm">
-				<div>
+		<form [formGroup]="userForm">
+			<div class="form">
+				<div class="form-row">
 					<label>
 						<input type="text"
 							   placeholder="* First Name"
 							   formControlName="firstName">
 					</label>
 				</div>
-				<div>
+				<div class="form-row">
 					<label>
 						<input type="text"
 							   placeholder="* Last Name"
 							   formControlName="lastName">
 					</label>
 				</div>
-				<div>
+				<div class="form-row">
 					<label>
 						<select formControlName="roleId">
 							<option *ngFor="let role of userService.getRoles()" [value]="role.id">
@@ -60,17 +65,15 @@
 						</select>
 					</label>
 				</div>
-				<div>
-					<button (click)="onSaveUserChangesClick()" [disabled]="!userForm.valid">
+				<div class="user-form-control">
+					<button (click)="onSaveUserChangesClick()"
+							class="save-changes-button"
+							[disabled]="!userForm.valid">
 						Save Changes
 					</button>
-					<!--					<div *ngIf="userForm.touched || userForm.dirty"-->
-					<!--						 [ngClass]="{'user-invite-valid': userForm.valid, 'user-invite-error': !userForm.valid}">-->
-					<!--						{{getError()}}-->
-					<!--					</div>-->
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 	<div class="user-profile-right">
 		<div class="user-profile-right-permissions">

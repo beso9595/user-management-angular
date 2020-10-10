@@ -58,7 +58,8 @@
 			<div class="user-view-table-role-column">
 				<div>
 					<div [class.user-view-inactive]="!user.isActive">
-						<div *ngIf="user.roleId === 1" [class.user-view-inactive-key]="!user.isActive">
+						<div *ngIf="user.roleId === 1"
+							 [class.user-view-inactive-key]="!user.isActive">
 							<img alt="key" src="../../../../assets/images/icons/key_white.png">
 						</div>
 						<b>
