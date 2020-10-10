@@ -1,32 +1,47 @@
-<div class="invite-user-main">
-	<form [formGroup]="userForm">
+<form [formGroup]="userForm">
+	<div class="invite-user-main">
 		<div class="invite-user-row">
 			<img alt="user" src="../../../../../assets/images/icons/user.png">
 
-			<input type="text"
-				   placeholder="* First Name"
-				   formControlName="firstName">
-			<input type="text"
-				   placeholder="* Last Name"
-				   formControlName="lastName">
+			<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+				<label>
+					<input type="text"
+						   placeholder="* First Name"
+						   formControlName="firstName">
+				</label>
+				<label>
+					<input type="text"
+						   placeholder="* Last Name"
+						   formControlName="lastName">
+				</label>
+			</div>
 		</div>
 		<div class="invite-user-row">
 			<img alt="user" src="../../../../../assets/images/icons/email.png">
 
-			<input type="text"
-				   placeholder="* Email"
-				   formControlName="email">
+			<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+				<label style="width: 100%;">
+					<input type="text"
+						   style="width: 100%;"
+						   placeholder="* Email"
+						   formControlName="email">
+				</label>
+			</div>
 		</div>
-		<div class="invite-user-row">
+		<div class="invite-user-row invite-user-row-left">
 			<img alt="user" src="../../../../../assets/images/icons/key_black.png">
 
-			<select formControlName="roleId">
-				<option *ngFor="let role of userService.getRoles()" [value]="role.id">
-					{{role.name}}
-				</option>
-			</select>
+			<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+				<label style="width: 100%;">
+					<select formControlName="roleId" style="width: 50%;">
+						<option *ngFor="let role of userService.getRoles()" [value]="role.id">
+							{{role.name}}
+						</option>
+					</select>
+				</label>
+			</div>
 		</div>
-		<div class="invite-user-row">
+		<div class="invite-user-row invite-user-row-control">
 			<button (click)="onSendUserInvitationClick()" [disabled]="!userForm.valid">
 				Send Invitation
 			</button>
@@ -35,5 +50,5 @@
 				{{getError()}}
 			</div>
 		</div>
-	</form>
-</div>
+	</div>
+</form>

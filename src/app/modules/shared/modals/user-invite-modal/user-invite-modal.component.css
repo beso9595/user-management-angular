@@ -1,11 +1,30 @@
 .invite-user-main {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
 }
 
 .invite-user-row {
   display: flex;
   flex-direction: row;
+}
+.invite-user-row img {
+  margin-right: 30px;
+}
+
+.invite-user-row-control {
+  margin-left: 50px;
+  justify-content: space-between;
+}
+.invite-user-row-control div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.invite-user-row-left {
+  justify-content: flex-start;
 }
 
 .user-invite-valid {
@@ -14,6 +33,29 @@
 
 .user-invite-error {
   color: #FF0000;
+}
+
+button {
+  background-color: #44a0d3;
+  padding: 10px 20px 10px 20px;
+  color: white;
+  font: normal normal 600 16px/21px Segoe UI;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+input, select {
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #c6c6c6;
+  background-color: #ffffff;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: none;
 }
 
 /*# sourceMappingURL=user-invite-modal.component.css.map */

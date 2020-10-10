@@ -1,6 +1,8 @@
 .delete-user-main {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100px;
 }
 
 .delete-user-info {
@@ -9,12 +11,32 @@
   justify-content: space-between;
 }
 
+.delete-user-full-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.delete-user-full-name img {
+  margin-right: 20px;
+}
+
 .active {
   color: #44a0d3;
 }
 
 .inactive {
   color: #fd0d00;
+}
+
+button {
+  background-color: #f79696;
+  padding: 10px 20px 10px 20px;
+  color: white;
+  font: normal normal 600 16px/21px Segoe UI;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=user-delete-modal.component.css.map */

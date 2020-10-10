@@ -45,6 +45,7 @@
 
 .title {
   margin-block-start: 0;
+  font: normal normal 600 36px/48px Segoe UI;
 }
 
 .content {
