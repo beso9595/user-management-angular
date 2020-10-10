@@ -74,6 +74,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 			lastName: this.userForm.get('lastName').value,
 			roleId: +this.userForm.get('roleId').value,
 		});
+		this.router.navigateByUrl('users');
 	}
 
 	onPermissionStatusChange(permissionId: number, isActive: boolean): void {
