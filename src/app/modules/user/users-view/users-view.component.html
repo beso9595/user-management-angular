@@ -69,9 +69,8 @@
 			</div>
 			<div class="user-view-table-status-column">
 				<div>
-					<img alt="toggle"
-						 (click)="onUserStatusClick(user)"
-						 src="../../../../assets/images/toggle_{{user.isActive ? 'on' : 'off'}}.png">
+					<app-toggle [isActive]="user.isActive"
+								(onChange)="onUserStatusClick(user, $event)"></app-toggle>
 				</div>
 			</div>
 			<div class="user-view-table-actions-column">

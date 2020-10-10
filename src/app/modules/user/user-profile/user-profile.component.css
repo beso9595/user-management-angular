@@ -50,9 +50,6 @@
   display: flex;
   flex-direction: row;
 }
-.user-profile-center-status img {
-  cursor: pointer;
-}
 .user-profile-center-status div {
   font: normal normal 300 16px/21px Segoe UI;
 }

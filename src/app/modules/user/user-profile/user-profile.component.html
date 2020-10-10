@@ -24,13 +24,11 @@
 		</div>
 	</div>
 	<div class="user-profile-center">
-		<div class="user-profile-center-details">
+		<div class="user-profile-center-title">
 			Details
 		</div>
 		<div class="user-profile-center-status">
-			<img alt="toggle"
-				 (click)="onUserStatusChange()"
-				 src="../../../../assets/images/toggle_{{user?.isActive ? 'on' : 'off'}}.png">
+			<app-toggle [isActive]="user?.isActive" (onChange)="onUserStatusChange($event)"></app-toggle>
 			<div>
 				The user is <span>
 				{{user?.isActive ? 'Active' : 'Inactive'}}
@@ -90,9 +88,8 @@
 				{{permission.name}}
 			</div>
 			<div>
-				<img alt="toggle"
-					 (click)="onPermissionStatusChange(permission.id)"
-					 src="../../../../assets/images/toggle_{{userService.getUserPermissionStatus(user, permission.id) ? 'on' : 'off'}}.png">
+				<app-toggle [isActive]="userService.getUserPermissionStatus(user, permission.id)"
+							(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
 			</div>
 		</div>
 
@@ -104,9 +101,8 @@
 					</b>
 				</div>
 				<div>
-					<img alt="toggle"
-						 (click)="onPermissionGroupStatusChange(permissionGroup.id)"
-						 src="../../../../assets/images/toggle_{{userService.getUserPermissionGroupStatus(user, permissionGroup.id) ? 'on' : 'off'}}.png">
+					<app-toggle [isActive]="userService.getUserPermissionGroupStatus(user, permissionGroup.id)"
+								(onChange)="onPermissionGroupStatusChange(permissionGroup.id, $event)"></app-toggle>
 				</div>
 			</div>
 			<div #content [ngStyle]="{'display': i == 0 ? 'block' : 'none'}">
@@ -116,9 +112,8 @@
 							{{permission.name}}
 						</div>
 						<div>
-							<img alt="toggle"
-								 (click)="onPermissionStatusChange(permission.id)"
-								 src="../../../../assets/images/toggle_{{userService.getUserPermissionStatus(user, permission.id) ? 'on' : 'off'}}.png">
+							<app-toggle [isActive]="userService.getUserPermissionStatus(user, permission.id)"
+										(onChange)="onPermissionStatusChange(permission.id, $event)"></app-toggle>
 						</div>
 					</div>
 				</div>

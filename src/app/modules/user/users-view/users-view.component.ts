@@ -77,8 +77,8 @@ export class UsersViewComponent implements OnInit, OnDestroy {
 		return item.id;
 	}
 
-	onUserStatusClick(user: User): void {
-		user.isActive = !user.isActive;
+	onUserStatusClick(user: User, isActive: boolean): void {
+		user.isActive = isActive;
 	}
 
 	onOpenUserProfileClick(userId: number): void {

@@ -73,7 +73,6 @@
 
 .user-view-table-status-column img {
   width: fit-content;
-  cursor: pointer;
 }
 
 .user-view-table-actions-header, .user-view-table-actions-column {

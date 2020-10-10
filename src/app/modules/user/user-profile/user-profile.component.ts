@@ -56,20 +56,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	onUserStatusChange(): void {
-		this.userService.updateUserStatus(this.user.id, !this.user.isActive);
-		this.user.isActive = !this.user.isActive;
+	onUserStatusChange(isActive: boolean): void {
+		this.userService.updateUserStatus(this.user.id, isActive);
+		this.user.isActive = isActive;
 	}
 
 	onSaveUserChangesClick(): void {
 
 	}
 
-	onPermissionStatusChange(permissionId: number): void {
+	onPermissionStatusChange(permissionId: number, isActive: boolean): void {
 
 	}
 
-	onPermissionGroupStatusChange(permissionGroupId: number): void {
+	onPermissionGroupStatusChange(permissionGroupId: number, isActive: boolean): void {
 
 	}
 

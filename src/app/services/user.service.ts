@@ -273,17 +273,17 @@ export class UserService {
 			const groupPermissionIds: number[] = groupPermissionList.map(p => p.id);
 			let rolePermissionList: RolePermission[] = this.rolePermissionList.filter(rp => groupPermissionIds.includes(rp.permissionId) && rp.roleId === user.roleId);
 
-			const keyValue = new Map();
+			const rolePermissionKeyValue = new Map();
 			if (user.customPermissionList && user.customPermissionList.length > 0) {
 				const customRolePermissionList: RolePermission[] = user.customPermissionList.filter(rp => groupPermissionIds.includes(rp.permissionId));
 				if (customRolePermissionList && customRolePermissionList.length > 0) {
 					customRolePermissionList.forEach(rp => {
-						keyValue.set(rp.permissionId, rp.isActive);
+						rolePermissionKeyValue.set(rp.permissionId, rp.isActive);
 					});
 				}
 			}
 			//
-			return rolePermissionList.every(rp => keyValue.has(rp.permissionId) ? keyValue.get(rp.permissionId) : rp.isActive);
+			return rolePermissionList.every(rp => rolePermissionKeyValue.has(rp.permissionId) ? rolePermissionKeyValue.get(rp.permissionId) : rp.isActive);
 		}
 		return false;
 	}
